@@ -18,8 +18,8 @@ services:
       - db
     restart: unless-stopped
     ports:
-      - target: 8443
-        published: 8443
+      - target: 8442
+        published: 8442
         protocol: tcp
         mode: host
   db:
