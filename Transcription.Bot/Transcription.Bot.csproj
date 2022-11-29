@@ -1,0 +1,70 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+        <PackageReference Include="Telegram.Bot" Version="18.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Trascribition\Trascribition.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Examples\Init1.jpg" />
+      <Content Include="Examples\Init1.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Examples\Init2.jpg" />
+      <Content Include="Examples\Init2.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Examples\Usage1.jpg" />
+      <Content Include="Examples\Usage1.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Examples\Usage1.png" />
+      <None Remove="Examples\Usage2.jpg" />
+      <Content Include="Examples\Usage2.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Examples\Usage3.jpg" />
+      <Content Include="Examples\Usage3.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Examples\Usage 4.jpg" />
+      <Content Include="Examples\Usage4.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Examples\Usage5.jpg" />
+      <Content Include="Examples\Usage5.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Examples\audioDmitrySkvortsov21018473429.m4a" />
+      <Content Include="Examples\audioDmitrySkvortsov21018473429.m4a">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Examples\audioiPhone11018473429.m4a" />
+      <Content Include="Examples\audioiPhone11018473429.m4a">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Examples\result.txt" />
+      <Content Include="Examples\result.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Examples\script.sh" />
+      <Content Include="Examples\script.sh">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,37 @@
+version: "3.3"
+
+services:
+  server:
+    image: tr_bot:latest
+    container_name: tr_bot
+    hostname: wb_server
+    env_file:
+      - .env
+    environment: 
+    
+      - ASPNETCORE_ENVIRONMENT=DevelopmentDocker
+      - ASPNETCORE_URLS=http://*:8443
+    build:
+      context: ./
+      dockerfile: ./Dockerfile.backend
+    depends_on:
+      - db
+    restart: unless-stopped
+    ports:
+      - target: 8443
+        published: 8443
+        protocol: tcp
+        mode: host
+  db:
+    image: postgres:latest
+    container_name: tr_bot_db    
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=WB
+      - POSTGRES_USER=postgres
+    ports:
+      - target: 5432
+        published: 5431
+        protocol: tcp
+        mode: host

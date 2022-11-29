@@ -1,0 +1,24 @@
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+WORKDIR /app
+ENV LANG=en_US.UTF-8 \
+    LANGUAGE=en_US.UTF-8
+EXPOSE 8443
+
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
+COPY ["Transcription.Bot/Transcription.Bot.csproj", "Transcription.Bot/"]
+RUN dotnet restore "Transcription.Bot/Transcription.Bot.csproj"
+COPY . .
+WORKDIR "/src/Transcription.Bot"
+RUN dotnet build "Transcription.Bot.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "Transcription.Bot.csproj" -c Release -o /app/publish
+
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS final
+RUN apt-get -y update
+RUN apt-get -y upgrade
+RUN apt-get install -y ffmpeg
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "Transcription.Bot.dll"]
