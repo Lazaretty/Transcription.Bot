@@ -36,16 +36,6 @@ public class PoolingService : BackgroundService
         {
             try
             {
-                using var innerScope = _services.CreateScope();
-
-                var userRepository = scope.ServiceProvider.GetRequiredService<UserRepository>();
-                var chatStateRepository = scope.ServiceProvider.GetRequiredService<ChatStateRepository>();
-                var yandexRequestRepository = scope.ServiceProvider.GetRequiredService<YandexRequestRepository>();
-                var logger = scope.ServiceProvider.GetRequiredService<ILogger<HandleUpdateService>>();
-
-
-                var handleService = new HandleUpdateService(botClient,userRepository,chatStateRepository, yandexRequestRepository, logger);
-                
                 Update[] updates;
                 
                 if(offset == -1)
@@ -59,6 +49,15 @@ public class PoolingService : BackgroundService
                 
                 foreach (var update in updates)
                 {
+                    using var innerScope = _services.CreateScope();
+
+                    var userRepository = scope.ServiceProvider.GetRequiredService<UserRepository>();
+                    var chatStateRepository = scope.ServiceProvider.GetRequiredService<ChatStateRepository>();
+                    var yandexRequestRepository = scope.ServiceProvider.GetRequiredService<YandexRequestRepository>();
+                    var logger = scope.ServiceProvider.GetRequiredService<ILogger<HandleUpdateService>>();
+
+                    var handleService = new HandleUpdateService(botClient,userRepository,chatStateRepository, yandexRequestRepository, logger);
+                    
                     await handleService.EchoAsync(update);
                     offset = update.Id;
                 }
